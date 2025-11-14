@@ -282,6 +282,28 @@ map.on('load', () => {
   ]);
 });
 
+// --- Popup foto untuk FASUM ---
+map.on('click', 'fasum-layer', (e) => {
+  const props = e.features[0].properties;
+
+  const popupHTML = `
+    <b>${props.nama}</b><br>
+    <img src="img/${props.foto}" width="180">
+  `;
+
+  new mapboxgl.Popup()
+    .setLngLat(e.lngLat)
+    .setHTML(popupHTML)
+    .addTo(map);
+});
+
+// Ubah cursor ketika hover
+map.on('mouseenter', 'fasum-layer', () => {
+  map.getCanvas().style.cursor = 'pointer';
+});
+map.on('mouseleave', 'fasum-layer', () => {
+  map.getCanvas().style.cursor = '';
+});
 </script>
 </body>
 </html>
